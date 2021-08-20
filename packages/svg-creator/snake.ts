@@ -60,7 +60,7 @@ export const createSnake = (chain: Snake[], { sizeCell, sizeDot }: Options, dura
           y: m.toFixed(1),
           width: s.toFixed(1),
           height: s.toFixed(1),
-          'font-size': s.toFixed(1) + 'px',
+          'font-size': ((i === 0 ? 20 : -2) + s).toFixed(1) + 'px',
           dx: r.toFixed(1),
           dy: r.toFixed(1),
         },
