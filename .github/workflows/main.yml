@@ -106,7 +106,7 @@ jobs:
         with:
           push: ${{ github.ref == 'refs/heads/master' }}
           tags: |
-            platane/snk:latest
-            platane/snk:${{ github.sha }}
+            toreylittlefield/snk:latest
+            toreylittlefield/snk:${{ github.sha }}
           file: packages/action/Dockerfile
           context: packages/action
