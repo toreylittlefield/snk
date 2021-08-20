@@ -2,7 +2,7 @@ import { getSnakeLength, snakeToCells } from '@snk/types/snake';
 import type { Snake } from '@snk/types/snake';
 import type { Color } from '@snk/types/grid';
 import type { Point } from '@snk/types/point';
-import { h, t } from './utils';
+import { t } from './utils';
 
 export type Options = {
   colorDots: Record<Color, string>;
