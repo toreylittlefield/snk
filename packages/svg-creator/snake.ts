@@ -1,8 +1,8 @@
-import { getSnakeLength, snakeToCells } from "@snk/types/snake";
-import type { Snake } from "@snk/types/snake";
-import type { Color } from "@snk/types/grid";
-import type { Point } from "@snk/types/point";
-import { h } from "./utils";
+import { getSnakeLength, snakeToCells } from '@snk/types/snake';
+import type { Snake } from '@snk/types/snake';
+import type { Color } from '@snk/types/grid';
+import type { Point } from '@snk/types/point';
+import { h, t } from './utils';
 
 export type Options = {
   colorDots: Record<Color, string>;
@@ -18,11 +18,7 @@ const percent = (x: number) => (x * 100).toFixed(2);
 
 const lerp = (k: number, a: number, b: number) => (1 - k) * a + k * b;
 
-export const createSnake = (
-  chain: Snake[],
-  { sizeCell, sizeDot }: Options,
-  duration: number
-) => {
+export const createSnake = (chain: Snake[], { sizeCell, sizeDot }: Options, duration: number) => {
   const snakeN = chain[0] ? getSnakeLength(chain[0]) : 0;
 
   const snakeParts: Point[][] = Array.from({ length: snakeN }, () => []);
@@ -44,19 +40,37 @@ export const createSnake = (
 
     const r = Math.min(4.5, (4 * s) / sizeDot);
 
-    return h("rect", {
-      class: `s s${i}`,
-      x: m.toFixed(1),
-      y: m.toFixed(1),
-      width: s.toFixed(1),
-      height: s.toFixed(1),
-      rx: r.toFixed(1),
-      ry: r.toFixed(1),
-    });
+    return (
+      // h('rect', {
+      //   class: `s s${i}`,
+      //   x: m.toFixed(1),
+      //   y: m.toFixed(1),
+      //   width: s.toFixed(1),
+      //   height: s.toFixed(1),
+      //   rx: r.toFixed(1),
+      //   ry: r.toFixed(1),
+      // }),
+      // 'font-size-adjust': '0.58',
+      // 'font-size': '1rem',
+      t(
+        'text',
+        {
+          class: `s s${i}`,
+          x: m.toFixed(1),
+          y: m.toFixed(1),
+          width: s.toFixed(1),
+          height: s.toFixed(1),
+          'font-size': s.toFixed(1) + 'px',
+          dx: r.toFixed(1),
+          dy: r.toFixed(1),
+        },
+        '👹'
+      )
+    );
   });
 
   const transform = ({ x, y }: Point) =>
-    `transform:translate(${x * sizeCell}px,${y * sizeCell}px)`;
+    `transform:translate(${x * sizeCell}px,${y * sizeCell}px) rotate(${x}deg)`;
 
   const styles = [
     `.s{ 
@@ -71,12 +85,10 @@ export const createSnake = (
 
       return [
         `@keyframes ${animationName} {` +
-          removeInterpolatedPositions(
-            positions.map((tr, i, { length }) => ({ ...tr, t: i / length }))
-          )
+          removeInterpolatedPositions(positions.map((tr, i, { length }) => ({ ...tr, t: i / length })))
             .map((p) => `${percent(p.t)}%{${transform(p)}}`)
-            .join("") +
-          "}",
+            .join('') +
+          '}',
 
         `.s.${id}{${transform(positions[0])};animation-name: ${animationName}}`,
       ];
