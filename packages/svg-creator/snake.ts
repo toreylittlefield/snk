@@ -76,13 +76,11 @@ export const createSnake = (chain: Snake[], { sizeCell, sizeDot }: Options, dura
     `.s{ 
       shape-rendering:geometricPrecision;
       fill:var(--cs);
-      animation: none linear ${duration}ms infinite
+      animation: none ease-out ${duration}ms infinite
     }`,
-
     ...snakeParts.map((positions, i) => {
       const id = `s${i}`;
       const animationName = id;
-
       return [
         `@keyframes ${animationName} {` +
           removeInterpolatedPositions(positions.map((tr, i, { length }) => ({ ...tr, t: i / length })))
