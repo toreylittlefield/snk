@@ -3,7 +3,7 @@ import { userContributionToGrid } from './userContributionToGrid';
 import { getBestRoute } from '@snk/solver/getBestRoute';
 import { createGif } from '@snk/gif-creator';
 import { createSvg } from '../svg-creator';
-import { snake9 } from '@snk/types/__fixtures__/snake';
+import { snake4 } from '@snk/types/__fixtures__/snake';
 import { getPathToPose } from '@snk/solver/getPathToPose';
 
 export const generateContributionSnake = async (
@@ -14,7 +14,7 @@ export const generateContributionSnake = async (
   const { cells, colorScheme } = await getGithubUserContribution(userName);
 
   const grid = userContributionToGrid(cells, colorScheme);
-  const snake = snake9;
+  const snake = snake4;
 
   const drawOptions = {
     sizeBorderRadius: 2,
